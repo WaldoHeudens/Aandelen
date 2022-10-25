@@ -42,7 +42,9 @@
             this.aandelenDataGridView.RowTemplate.Height = 25;
             this.aandelenDataGridView.Size = new System.Drawing.Size(554, 151);
             this.aandelenDataGridView.TabIndex = 1;
+            this.aandelenDataGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.aandelenDataGridView_CellEndEdit);
             this.aandelenDataGridView.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.aandelenDataGridView_RowsAdded);
+            this.aandelenDataGridView.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.aandelenDataGridView_UserDeletingRow);
             // 
             // lblAandelen
             // 

@@ -15,6 +15,8 @@ namespace Les_8_3
                                     "Connect Timeout=30";
 
         public List<Aandeel> Aandelen { get; set; }
+        public List<int> deletedIds = new List<int>();
+
 
 
         public List<Aandeel> getAlleAandelen ()
@@ -48,18 +50,47 @@ namespace Les_8_3
         {
             SqlConnection connection = new SqlConnection(connectionString);
             connection.Open();
+            
             foreach (Aandeel aandeel in Aandelen)
             {
                 if (aandeel.werdToegevoegd())
                 {
                     SqlCommand command = new SqlCommand("INSERT INTO Aandelen (Id, Naam, Omschrijving) VALUES ('" 
-                                        + aandeel.Id + "','" + aandeel.Naam + "','" + aandeel.MijnOmschrijving +
-                                        "')", connection);
+                                        + aandeel.Id 
+                                        + "','" 
+                                        + aandeel.Naam 
+                                        + "','" 
+                                        + aandeel.MijnOmschrijving 
+                                        + "')", connection);
                     command.ExecuteNonQuery();
       
                     aandeel.Toevoegen(false);
                 }
+                if (aandeel.isGewijzigd)
+                {
+                    SqlCommand command = new SqlCommand("UPDATE Aandelen SET Naam = '"
+                                            + aandeel.Naam 
+                                            + "',Omschrijving = '" 
+                                            + aandeel.MijnOmschrijving
+                                            + "' WHERE Id = "
+                                            + aandeel.Id,
+                                            connection);
+                    command.ExecuteNonQuery();
+
+                    aandeel.isGewijzigd = false;
+
+                }
             }
+
+            foreach (int aandeelId in deletedIds)
+            {
+                SqlCommand command = new SqlCommand("DELETE FROM Aandelen WHERE ID = "
+                                        + aandeelId,
+                                        connection);
+                command.ExecuteNonQuery();
+            }
+
+            deletedIds.Clear();
 
             connection.Close();
         }

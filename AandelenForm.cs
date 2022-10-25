@@ -51,5 +51,25 @@
             btBewaar.Enabled = false;
 
         }
+
+        private void aandelenDataGridView_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            aandelenDAO.Aandelen[aandelenDataGridView.CurrentCell.RowIndex].isGewijzigd = true;
+            btBewaar.Enabled = true;
+        }
+
+        private void aandelenDataGridView_UserDeletedRow(object sender, DataGridViewRowEventArgs e)
+        {
+            // Haal de rij op de verwijderd werd
+
+            // Voeg deze rij toe aan de deletedAandelen
+
+        }
+
+        private void aandelenDataGridView_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
+        {
+            aandelenDAO.deletedIds.Add(aandelenDAO.Aandelen[e.Row.Index].Id);
+            btBewaar.Enabled = true;
+        }
     }
 }
