@@ -22,7 +22,7 @@
 
         private void aandelenDataGridView_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
-            Aandeel a = aandelenDAO.Aandelen.Last();
-            }
+            //Aandeel a = aandelenDAO.Aandelen.Last();
+        }
     }
 }
