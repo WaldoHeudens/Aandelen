@@ -30,6 +30,7 @@
         {
             this.aandelenDataGridView = new System.Windows.Forms.DataGridView();
             this.lblAandelen = new System.Windows.Forms.Label();
+            this.btBewaar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.aandelenDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -52,11 +53,23 @@
             this.lblAandelen.TabIndex = 2;
             this.lblAandelen.Text = "Aandelen";
             // 
+            // btBewaar
+            // 
+            this.btBewaar.Enabled = false;
+            this.btBewaar.Location = new System.Drawing.Point(12, 205);
+            this.btBewaar.Name = "btBewaar";
+            this.btBewaar.Size = new System.Drawing.Size(133, 31);
+            this.btBewaar.TabIndex = 3;
+            this.btBewaar.Text = "Bewaar wijzigingen";
+            this.btBewaar.UseVisualStyleBackColor = true;
+            this.btBewaar.Click += new System.EventHandler(this.btBewaar_Click);
+            // 
             // AandelenForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btBewaar);
             this.Controls.Add(this.lblAandelen);
             this.Controls.Add(this.aandelenDataGridView);
             this.Name = "AandelenForm";
@@ -71,5 +84,6 @@
         #endregion
         private DataGridView aandelenDataGridView;
         private Label lblAandelen;
+        private Button btBewaar;
     }
 }

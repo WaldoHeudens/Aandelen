@@ -21,10 +21,6 @@ namespace Les_8_3
         {
             List<Aandeel> aandelen = new List<Aandeel>();
 
-            //// Even een paar dummy aandelen
-            //aandelen.Add(new Aandeel() { Id = 1, MijnOmschrijving = "nonsens", Naam = "XX1" });
-            //aandelen.Add(new Aandeel() { Id = 2, MijnOmschrijving = "omschrijving 2", Naam = "XX2" });
-            //aandelen.Add(new Aandeel() { Id = 3, MijnOmschrijving = "omschrijving 3", Naam = "XX3" });
 
             SqlConnection connection = new SqlConnection(connectionString);
             SqlCommand command = new SqlCommand("SELECT Id, Naam, Omschrijving FROM Aandelen WHERE InGebruik = 1", connection);
@@ -44,9 +40,28 @@ namespace Les_8_3
                 }
             }
 
-
             connection.Close();
             return aandelen;
+        }
+
+        internal void setAllAandelen()
+        {
+            SqlConnection connection = new SqlConnection(connectionString);
+            connection.Open();
+            foreach (Aandeel aandeel in Aandelen)
+            {
+                if (aandeel.werdToegevoegd())
+                {
+                    SqlCommand command = new SqlCommand("INSERT INTO Aandelen (Id, Naam, Omschrijving) VALUES ('" 
+                                        + aandeel.Id + "','" + aandeel.Naam + "','" + aandeel.MijnOmschrijving +
+                                        "')", connection);
+                    command.ExecuteNonQuery();
+      
+                    aandeel.Toevoegen(false);
+                }
+            }
+
+            connection.Close();
         }
     }
 }

@@ -12,6 +12,18 @@ namespace Les_8_3
         public string Naam { get; set; }
         public string MijnOmschrijving { get; set; }
 
+          Boolean isToegevoegd { get; set; }
+        public Boolean isGewijzigd;
         public List<Transactie> Transacties { get; set; }
+
+        public bool werdToegevoegd()
+        {
+            return isToegevoegd;
+        }
+
+        public void Toevoegen(bool toevoegen = true)
+        {
+            isToegevoegd = toevoegen;
+        }
     }
 }
