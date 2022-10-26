@@ -19,13 +19,13 @@ namespace Les_8_3
 
 
 
-        public List<Aandeel> getAlleAandelen ()
+        public List<Aandeel> getAlleAandelen (string selectie)
         {
             List<Aandeel> aandelen = new List<Aandeel>();
 
 
             SqlConnection connection = new SqlConnection(connectionString);
-            SqlCommand command = new SqlCommand("SELECT Id, Naam, Omschrijving FROM Aandelen WHERE InGebruik = 1", connection);
+            SqlCommand command = new SqlCommand("SELECT Id, Naam, Omschrijving FROM Aandelen WHERE InGebruik = 1 AND Deleted = 0", connection);
             connection.Open();
 
             using (SqlDataReader reader = command.ExecuteReader())
@@ -41,6 +41,8 @@ namespace Les_8_3
 
                 }
             }
+            if (selectie != "")
+                aandelen = aandelen.Where(a => a.Naam.Contains(selectie) || a.MijnOmschrijving.Contains(selectie)).ToList();    
 
             connection.Close();
             return aandelen;
@@ -82,10 +84,13 @@ namespace Les_8_3
                 }
             }
 
-            foreach (int aandeelId in deletedIds)
+            foreach (int id in deletedIds)
             {
-                SqlCommand command = new SqlCommand("DELETE FROM Aandelen WHERE ID = "
-                                        + aandeelId,
+                //SqlCommand transactieCommand = new SqlCommand("DELETE FROM Transacties WHERE AandeelId = " + id, connection);
+                //transactieCommand.ExecuteNonQuery();
+
+                SqlCommand command = new SqlCommand("UPDATE Aandelen SET Deleted = '1' WHERE Id = "
+                                        + id,
                                         connection);
                 command.ExecuteNonQuery();
             }
@@ -94,5 +99,17 @@ namespace Les_8_3
 
             connection.Close();
         }
+
+
+
+        List<Aandeel> Selectie(string s)
+        {
+            //return Aandelen.Where(delegate (Aandeel a) { return a.Naam.Contains(s) || a.MijnOmschrijving.Contains(s); }).ToList();
+
+
+            // we gebruiken volgende "lambda"-expressie om hetzelfde te doen:
+            return Aandelen.Where(a => a.Naam.Contains(s) || a.MijnOmschrijving.Contains(s)).ToList();
+        }
+
     }
 }

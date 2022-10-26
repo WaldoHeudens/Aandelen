@@ -32,13 +32,14 @@
             this.lblAandelen = new System.Windows.Forms.Label();
             this.btBewaar = new System.Windows.Forms.Button();
             this.btUndo = new System.Windows.Forms.Button();
+            this.tbSelectie = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.aandelenDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // aandelenDataGridView
             // 
             this.aandelenDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.aandelenDataGridView.Location = new System.Drawing.Point(12, 38);
+            this.aandelenDataGridView.Location = new System.Drawing.Point(12, 91);
             this.aandelenDataGridView.Name = "aandelenDataGridView";
             this.aandelenDataGridView.RowTemplate.Height = 25;
             this.aandelenDataGridView.Size = new System.Drawing.Size(579, 151);
@@ -50,16 +51,16 @@
             // lblAandelen
             // 
             this.lblAandelen.AutoSize = true;
-            this.lblAandelen.Location = new System.Drawing.Point(12, 20);
+            this.lblAandelen.Location = new System.Drawing.Point(12, 59);
             this.lblAandelen.Name = "lblAandelen";
-            this.lblAandelen.Size = new System.Drawing.Size(57, 15);
+            this.lblAandelen.Size = new System.Drawing.Size(122, 15);
             this.lblAandelen.TabIndex = 2;
-            this.lblAandelen.Text = "Aandelen";
+            this.lblAandelen.Text = "Selecteer aandelen op";
             // 
             // btBewaar
             // 
             this.btBewaar.Enabled = false;
-            this.btBewaar.Location = new System.Drawing.Point(615, 38);
+            this.btBewaar.Location = new System.Drawing.Point(615, 91);
             this.btBewaar.Name = "btBewaar";
             this.btBewaar.Size = new System.Drawing.Size(133, 31);
             this.btBewaar.TabIndex = 3;
@@ -70,7 +71,7 @@
             // btUndo
             // 
             this.btUndo.Enabled = false;
-            this.btUndo.Location = new System.Drawing.Point(615, 88);
+            this.btUndo.Location = new System.Drawing.Point(615, 141);
             this.btUndo.Name = "btUndo";
             this.btUndo.Size = new System.Drawing.Size(133, 31);
             this.btUndo.TabIndex = 4;
@@ -78,11 +79,20 @@
             this.btUndo.UseVisualStyleBackColor = true;
             this.btUndo.Click += new System.EventHandler(this.btUndo_Click);
             // 
+            // tbSelectie
+            // 
+            this.tbSelectie.Location = new System.Drawing.Point(149, 56);
+            this.tbSelectie.Name = "tbSelectie";
+            this.tbSelectie.Size = new System.Drawing.Size(172, 23);
+            this.tbSelectie.TabIndex = 5;
+            this.tbSelectie.TextChanged += new System.EventHandler(this.tbSelectie_TextChanged);
+            // 
             // AandelenForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(769, 450);
+            this.Controls.Add(this.tbSelectie);
             this.Controls.Add(this.btUndo);
             this.Controls.Add(this.btBewaar);
             this.Controls.Add(this.lblAandelen);
@@ -101,5 +111,6 @@
         private Label lblAandelen;
         private Button btBewaar;
         private Button btUndo;
+        private TextBox tbSelectie;
     }
 }

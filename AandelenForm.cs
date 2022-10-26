@@ -25,12 +25,12 @@
         }
 
 
-        private void HaalAandelenOp()
+        private void HaalAandelenOp(string selectie = "")
         {
             aandelenDataGridView.RowsAdded -= new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.aandelenDataGridView_RowsAdded);
 
             aandelenDAO = new AandelenDAO();
-            aandelenDAO.Aandelen = aandelenDAO.getAlleAandelen();
+            aandelenDAO.Aandelen = aandelenDAO.getAlleAandelen(selectie);
 
             aandelenBindingSource.DataSource = aandelenDAO.Aandelen;
             aandelenDataGridView.DataSource = aandelenBindingSource;
@@ -74,8 +74,15 @@
         private void btUndo_Click(object sender, EventArgs e)
         {
             HaalAandelenOp();
+            aandelenDAO.deletedIds.Clear();
             btBewaar.Enabled = false;
             btUndo.Enabled = false;
+        }
+
+ 
+        private void tbSelectie_TextChanged(object sender, EventArgs e)
+        {
+            HaalAandelenOp(tbSelectie.Text);
         }
     }
 }
